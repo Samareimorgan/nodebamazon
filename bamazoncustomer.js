@@ -68,20 +68,82 @@ function productPrompt() {
             }
         ])
           .then(function(answers) {
-              //console.log(answers);
-              var quantity = parseInt(answers.itemQuantity);
-              //console.log(quantity);
-              var id = parseInt(answers.productID);
-              //console.log(id);
+            //console.log(answers);
+            var quantity = parseInt(answers.itemQuantity);
+            //console.log(quantity);
+            var id = parseInt(answers.productID);
+            //console.log(id);
             // based on their answers, find item_id against database
             connection.query("SELECT * FROM products", function(err, results) {
                 if (err) throw err;
                  else 
                 for(var i= 0; i<results.length; i++) {
                     if(id === results[i].item_id) {
-                        console.log ("I see that you would like to purchase " + quantity + " of: " + results[i].product_name);
+                        console.log ("I see that you would like to purchase " + quantity + " of: " + results[i].product_name + "\n" +
+                        "I will check that we have enough in stock. One moment please.");     
+                        if(results[i].stock_quantity >= quantity){
+                            console.log("We have " + results[i].stock_quantity + " at this time. We have enough stock to fulfill your order");
+                            updateQuantity(results[i].stock_quantity, quantity, id);
+                            verifyNewQuantity(id);
+                            verifyCost(quantity,id);
+                        }
+                         else 
+                            console.log("We only have " + results[i].stock_quantity+ " at this time. We do not have sufficient stock to fulfill your order at this time. ")
                     }
+
+            
                 }
           })
         })
+}
+
+function updateQuantity (stockQuantity, customerQuantity, id) {
+    newQuantity = (stockQuantity - customerQuantity);
+    console.log(newQuantity);
+
+        connection.query(
+            
+            "UPDATE products SET ? WHERE ?",
+                [
+                    {
+                    stock_quantity: newQuantity,
+                    },
+                    {
+                    item_id: id
+                    }
+                ],
+                function(err) {
+                    if (err) throw err;
+                    console.log("Quantity has been updated");
+                    console.log("New Quantity: " +newQuantity);
+                }
+        ) 
+}
+function verifyNewQuantity(id) {
+    connection.query("SELECT *FROM products", function(err, results) {
+        if (err) throw err;
+            else 
+                for(var i= 0; i<results.length; i++) {
+                    if(id == results[i].item_id) {
+                        console.log("The new quantity in stock is: " + results[i].stock_quantity);
+                    }
+                }
+
+
+    })
+}
+function verifyCost(quantity, id) {
+        connection.query("SELECT *FROM products", function(err, results) {
+            if (err) throw err;
+                else 
+                    for(var i= 0; i<results.length; i++) {
+                        if(id == results[i].item_id) {
+                            var cost = (results[i].price * quantity);
+                            console.log(cost);
+                            console.log("You are purchasing " + quantity + " " + results[i].product_name + " at the price of " +results[i].price + "\n" + "Please pay $" + cost);
+                        }
+                    }
+
+         })
+
 }
