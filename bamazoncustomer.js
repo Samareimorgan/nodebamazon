@@ -18,10 +18,14 @@ connection.connect(function(err){
         throw err
     }
 
-    productPrompt();
+    
     
     
 });
+
+displayProducts();
+
+productPrompt();
 
 //Function to display products in the database 
 function displayProducts() {
@@ -29,7 +33,7 @@ function displayProducts() {
         if (err) throw err;
             else 
                 for(var i= 0; i<results.length; i++) { 
-                console.log("Item: " + results[i].product_name + "\n" +
+                console.log("\n" + "Item: " + results[i].product_name + "\n" +
                 "Product ID: " + results[i].item_id +"\n" +
                 "Price: " + results[i].price + "\n" +
                 "----------------------------------------------"
@@ -37,11 +41,13 @@ function displayProducts() {
             }
     
     })
+
+    
     
 }
 //Function to go through the product prompts for the customer
 function productPrompt() {
-    displayProducts();
+   
     inquirer
         .prompt([
             {
@@ -77,7 +83,7 @@ function productPrompt() {
                             //update Quantity in the database
                             updateQuantity(results[i].stock_quantity, quantity, id);
                             //This verifies that the database has been updated ... can be commented out
-                            verifyNewQuantity(id);
+                           // verifyNewQuantity(id);
                             //This requests the amount owed from the customer.
                             verifyCost(quantity,id);
                         }
@@ -94,7 +100,7 @@ function productPrompt() {
 //function to update the mysql database 
 function updateQuantity (stockQuantity, customerQuantity, id) {
     newQuantity = (stockQuantity - customerQuantity);
-    console.log(newQuantity);
+    //console.log(newQuantity);
 
         connection.query(
             
@@ -136,8 +142,8 @@ function verifyCost(quantity, id) {
                     for(var i= 0; i<results.length; i++) {
                         if(id == results[i].item_id) {
                             var cost = (results[i].price * quantity);
-                            console.log(cost);
-                            console.log("You are purchasing " + quantity + " " + results[i].product_name + " at the price of " +results[i].price + "\n" + "Please pay $" + cost);
+                           // console.log(cost);
+                            console.log("You are purchasing " + quantity + " " + results[i].product_name + " at the price of $" +results[i].price + "\n" + "Please pay $" + cost);
                         }
                     }
 
