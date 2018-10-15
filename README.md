@@ -4,7 +4,7 @@
 Bamazon is run through Node.js and utilizes the Mysql and Inquirer modules.  
 The goal of Bamazon is to provide insight to the mysql database when the user answers the inquirer questions.  
 
-## bamazonCustmer.js
+## bamazoncustomer.js
 The bamazoncustomer.js file is used by a potential customer who is interested in purchasing a product at the store.  When run, the application requests the Id of the product and lists the products in the store catalog.   
 
 ![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/customerjs%201.JPG "bamazoncustomer.js product list")
@@ -27,12 +27,11 @@ The code file has several commented out sections that acted as aids to confirm t
 #### Dependencies: mysql & inquirer modules
 
 1. Please ensure node.js is installed 
-2. Once installed please npm init to create a Json package
-3. Then install the following in order: 
+2. Then install the following in order into the application folder: 
     npm install
     npm install mysql
     npm install inquirer
-4. You are ready to open the application in the cli and run the application
+3. You are ready to open the application in the cli and run the application
 
 
 ## Credits
