@@ -21,6 +21,27 @@ The code file has several commented out sections that acted as aids to confirm t
 
 ![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/customerjs%20-%20in%20stock%20-%20commented%20out.JPG "bamazoncustomer.js uncommented code in stock")
 
+## bamazonmanager.js
+This file is for a manager of a company to allow them to access information from the database, add inventory to products or add new products. 
+
+The begins with a list of actions to select from
+![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/manager%20questions.JPG "bamazonmanager.js list of actions")
+
+The view products list will list all the products in the product catalog and all relevant information.
+![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/manager%20view%20product.JPG "bamazonmanager.js product list")
+
+The view low inventory action will list all inventory with stock of 2 or less
+![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/manager%20low%20inventory.JPG "bamazonmanager.js view of low inventory")
+
+The add inventory will ask questions regarding what item and how many to add, then confirm it has been added to inventoy
+
+![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/manager%20add%20inventory.JPG "bamazonmanager.js add inventory questions")
+
+The add product action will prompt the manager for name, department, number of quantity and price of the new product, then will confirm the information provided. 
+![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/manager%20Add%20product.JPG "bamazonmanager.js add product questions")
+
+Once new product has been added, if the view products is requested at a later time, then that new product is the last on the list. 
+![alt text](https://raw.githubusercontent.com/Samareimorgan/nodebamazon/master/images/manager%20producted%20has%20been%20added.JPG "bamazonmanager.js product list with new product")
 
 ## Install
 
